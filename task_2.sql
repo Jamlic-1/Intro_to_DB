@@ -1,4 +1,4 @@
-USE alx_book_store;
+
 
 CREATE TABLE authors (
   author_id INT PRIMARY KEY,
