@@ -1,5 +1,8 @@
--- Show the current database
+-- Use the correct database
+USE alx_book_store;
+
+-- Show the current database in use
 SELECT DATABASE();
 
--- Display the full description of the 'books' table
-SHOW CREATE TABLE Books;
+-- Show full column details of the table 'books'
+SHOW COLUMNS FROM Books;
