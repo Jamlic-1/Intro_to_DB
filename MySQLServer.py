@@ -26,13 +26,13 @@ def create_database():
             try:
                 cursor.close()
             except Exception:
-                pass
+                print(f" Error: {Exception}")
         # Close connection if it was created and is connected
         if connection is not None and connection.is_connected():
             try:
                 connection.close()
             except Exception:
-                pass
+                print(f" Error: {Exception}")
 
 if __name__ == "__main__":
     create_database()
