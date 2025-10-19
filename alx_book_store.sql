@@ -27,7 +27,7 @@ CREATE TABLE customers (
 );
 
 -- Create Orders Table
-CREATE TABLE orders (
+CREATE TABLE Orders (
   order_id INT PRIMARY KEY,
   customer_id INT,
   order_date DATE,
@@ -35,7 +35,7 @@ CREATE TABLE orders (
 );
 
 -- Create Order_Details Table
-CREATE TABLE order_details (
+CREATE TABLE Order_details (
   orderdetailid INT PRIMARY KEY,
   order_id INT,
   book_id INT,
