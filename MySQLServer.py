@@ -1,4 +1,4 @@
-##!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 MySQLServer.py - Script to create alx_book_store database
 """
@@ -9,6 +9,7 @@ from mysql.connector import Error
 def create_database():
     """Create alx_book_store database if it doesn't exist"""
     connection = None
+    cursor = None
     try:
         # Connect to MySQL server (without specifying a database)
         connection = mysql.connector.connect(
@@ -21,18 +22,25 @@ def create_database():
             cursor = connection.cursor()
             
             # Create database if it doesn't exist
+            # Using CREATE DATABASE IF NOT EXISTS to avoid SELECT/SHOW statements
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             
             print("Database 'alx_book_store' created successfully!")
             
     except Error as e:
-        print(f"Error: {e}")
+        print(f"Error connecting to MySQL: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
     finally:
         # Close database connection
-        if connection and connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed")
+        try:
+            if cursor is not None:
+                cursor.close()
+            if connection is not None and connection.is_connected():
+                connection.close()
+                print("MySQL connection is closed")
+        except Exception as e:
+            print(f"Error closing connection: {e}")
 
 if __name__ == "__main__":
     create_database()
