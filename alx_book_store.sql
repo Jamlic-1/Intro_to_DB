@@ -1,39 +1,45 @@
+-- Create Database
 CREATE DATABASE IF NOT EXISTS alx_book_store;
 USE alx_book_store;
 
-CREATE TABLE IF NOT EXISTS authors (
-  author_id INT NOT NULL PRIMARY KEY,
-  author_name VARCHAR(215) NOT NULL
+-- Create Authors Table
+CREATE TABLE authors (
+  author_id INT PRIMARY KEY,
+  author_name VARCHAR(215)
 );
 
-CREATE TABLE IF NOT EXISTS books (
-  book_id INT NOT NULL PRIMARY KEY,
-  title VARCHAR(130) NOT NULL,
+-- Create Books Table
+CREATE TABLE books (
+  book_id INT PRIMARY KEY,
+  title VARCHAR(130),
   author_id INT,
   price DOUBLE,
   publication_date DATE,
-  CONSTRAINT fk_books_authors FOREIGN KEY (author_id) REFERENCES authors(author_id)
+  FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
 
-CREATE TABLE IF NOT EXISTS customers (
-  customer_id INT NOT NULL PRIMARY KEY,
-  customer_name VARCHAR(215) NOT NULL,
+-- Create Customers Table
+CREATE TABLE customers (
+  customer_id INT PRIMARY KEY,
+  customer_name VARCHAR(215),
   email VARCHAR(215),
   address TEXT
 );
 
-CREATE TABLE IF NOT EXISTS orders (
-  order_id INT NOT NULL PRIMARY KEY,
+-- Create Orders Table
+CREATE TABLE orders (
+  order_id INT PRIMARY KEY,
   customer_id INT,
   order_date DATE,
-  CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
-CREATE TABLE IF NOT EXISTS order_details (
-  orderdetailid INT NOT NULL PRIMARY KEY,
+-- Create Order_Details Table
+CREATE TABLE order_details (
+  orderdetailid INT PRIMARY KEY,
   order_id INT,
   book_id INT,
   quantity DOUBLE,
-  CONSTRAINT fk_orderdetails_orders FOREIGN KEY (order_id) REFERENCES orders(order_id),
-  CONSTRAINT fk_orderdetails_books FOREIGN KEY (book_id) REFERENCES books(book_id)
+  FOREIGN KEY (order_id) REFERENCES orders(order_id),
+  FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
