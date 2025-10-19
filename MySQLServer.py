@@ -1,22 +1,29 @@
+#!/usr/bin/env python3
 import mysql.connector
 from mysql.connector import Error
 
-try:
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password=""  # replace with your MySQL password if set
-    )
+def create_database():
+    try:
+        # Connect to MySQL server
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='your_password'  # ← replace with your MySQL root password
+        )
 
-    if conn.is_connected():
-        cursor = conn.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-        print("Database 'alx_book_store' created successfully!")
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+            print("Database 'alx_book_store' created successfully!")
 
-except Error as e:
-    print(f"Error: {e}")
+    except Error as e:
+        print(f"Error: {e}")
 
-finally:
-    if conn.is_connected():
-        cursor.close()
-        conn.close()
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
+if __name__ == "__main__":
+    create_database()
